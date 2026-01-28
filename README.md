@@ -25,6 +25,6 @@ It includes:
 
 ### **Steps**
 ```bash
-cd src/WeatherApp.Api
+cd src/WeatherForecastApi
 dotnet restore
 dotnet run

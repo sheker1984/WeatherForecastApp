@@ -1,0 +1,16 @@
+{
+  "daily": {
+    "time": [
+      "2020-07-13"
+    ],
+    "temperature_2m_min": [
+      27.6
+    ],
+    "temperature_2m_max": [
+      38.2
+    ],
+    "precipitation_sum": [
+      0
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WeatherForecastApp/WeatherForescastApp.csproj" />
+  <Project Path="WeatherForecastTracker/WeatherForecastTracker.csproj" />
+</Solution>

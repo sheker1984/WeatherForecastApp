@@ -1,0 +1,75 @@
+﻿@page
+@model WeatherApp.Razor.Pages.WeatherModel
+@{
+    ViewData["Title"] = "Weather";
+}
+
+<h2>Historical Weather</h2>
+
+@if (Model.IsLoading)
+{
+    <p>Loading weather data…</p>
+}
+else if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color:red">@Model.ErrorMessage</p>
+}
+else if (Model.Entries.Count == 0)
+{
+    <p>No data available.</p>
+}
+else
+{
+    <form method="get">
+        <label>Sort by:</label>
+        <select name="SortBy" value="@Model.SortBy">
+            <option value="date">Date</option>
+            <option value="min">Min Temp</option>
+            <option value="max">Max Temp</option>
+        </select>
+
+        <input type="hidden" name="Ascending" value="@Model.Ascending" />
+
+        <button type="submit">Apply</button>
+        <button type="submit" name="Ascending" value="@(Model.Ascending ? "false" : "true")">
+            Toggle Direction (@(Model.Ascending ? "Asc" : "Desc"))
+        </button>
+    </form>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Min Temp</th>
+                <th>Max Temp</th>
+                <th>Precipitation</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model.Entries)
+            {
+                <tr onclick="location.href='?SortBy=@Model.SortBy&Ascending=@Model.Ascending&SelectedDate=@e.Date'"
+                    style="cursor:pointer">
+                    <td>@e.Date</td>
+                    <td>@e.MinTemperature</td>
+                    <td>@e.MaxTemperature</td>
+                    <td>@e.PrecipitationSum</td>
+                    <td>@e.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.Selected != null)
+    {
+        <h3>Details for @Model.Selected.Date</h3>
+        <ul>
+            <li><b>Status:</b> @Model.Selected.Status</li>
+            <li><b>Error:</b> @Model.Selected.ErrorMessage</li>
+            <li><b>Min Temp:</b> @Model.Selected.MinTemperature</li>
+            <li><b>Max Temp:</b> @Model.Selected.MaxTemperature</li>
+            <li><b>Precipitation:</b> @Model.Selected.PrecipitationSum</li>
+        </ul>
+    }
+}

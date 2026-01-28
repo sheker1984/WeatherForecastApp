@@ -14,14 +14,31 @@ public class FileWeatherStorage : IWeatherStorage
         Directory.CreateDirectory(_rootPath);
     }
 
+    /// <summary>
+    /// Get Path
+    /// </summary>
+    /// <param name="isoDate"></param>
+    /// <returns></returns>
     private string GetPath(string isoDate) => Path.Combine(_rootPath, $"{isoDate}.json");
 
+    /// <summary>
+    /// Check Exists
+    /// </summary>
+    /// <param name="isoDate"></param>
+    /// <returns></returns>
     public Task<bool> ExistsAsync(string isoDate)
     {
         var path = GetPath(isoDate);
         return Task.FromResult(File.Exists(path));
     }
 
+    /// <summary>
+    /// Save
+    /// </summary>
+    /// <param name="isoDate"></param>
+    /// <param name="response"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task SaveAsync(string isoDate, OpenMeteoResponse response, CancellationToken cancellationToken = default)
     {
         var path = GetPath(isoDate);
@@ -29,6 +46,12 @@ public class FileWeatherStorage : IWeatherStorage
         await File.WriteAllTextAsync(path, json, cancellationToken);
     }
 
+    /// <summary>
+    /// Load
+    /// </summary>
+    /// <param name="isoDate"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<OpenMeteoResponse?> LoadAsync(string isoDate, CancellationToken cancellationToken = default)
     {
         var path = GetPath(isoDate);

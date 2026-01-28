@@ -14,6 +14,12 @@ public class DateParser : IDateParser
         "yyyy-MM-dd"
     };
 
+    /// <summary>
+    /// Parse Dates
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    /// <exception cref="FileNotFoundException"></exception>
     public IEnumerable<(string Raw, DateTime? Parsed, WeatherStatus Status, string? Error)> ParseDates(string filePath)
     {
         if (!File.Exists(filePath))

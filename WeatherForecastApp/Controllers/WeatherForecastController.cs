@@ -15,6 +15,11 @@ public class WeatherController : ControllerBase
         _weatherService = weatherService;
     }
 
+    /// <summary>
+    /// Get Weather Entries
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WeatherEntry>>> Get(CancellationToken cancellationToken)
     {
